@@ -15,6 +15,12 @@
 
     <dependencies>
 
+        <!-- selenium -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+        </dependency>
+
         <!-- webSocket客户端 -->
         <dependency>
             <groupId>org.java-websocket</groupId>
