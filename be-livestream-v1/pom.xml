@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.cmcorg20230301</groupId>
+        <artifactId>be-engine-v1</artifactId>
+        <version>2023.3.1</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>com.cmcorg20240415.livestream</groupId>
+    <artifactId>be-livestream-v1</artifactId>
+    <version>2024.4.15</version>
+
+    <packaging>pom</packaging>
+
+    <description>项目顶级 pom.xml，目的：1 方便打包modules 2 依赖版本控制（所以不要在其他 pom.xml里面，添加带有
+        version标签的依赖）
+    </description>
+
+    <properties>
+        <cmcorg20240415livestream.groupId>com.cmcorg20240415.livestream</cmcorg20240415livestream.groupId>
+        <cmcorg20240415livestream.version>2024.4.15</cmcorg20240415livestream.version>
+    </properties>
+
+    <modules>
+        <module>be-livestream-start</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <!-- be-livestream-start -->
+            <dependency>
+                <groupId>${cmcorg20240415livestream.groupId}</groupId>
+                <artifactId>be-livestream-start</artifactId>
+                <version>${cmcorg20240415livestream.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <configuration>
+                        <excludes>
+                            <exclude>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                            </exclude>
+                        </excludes>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+</project>
