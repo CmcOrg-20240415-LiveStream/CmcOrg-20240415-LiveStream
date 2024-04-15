@@ -7,8 +7,10 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.cmcorg20240415.livestream.douyu.properties.LiveStreamDouYuProperties;
@@ -19,7 +21,7 @@ import lombok.SneakyThrows;
 @Component
 public class LiveStreamDouYuUtil {
 
-    private static LiveStreamDouYuProperties liveStreamDouYuProperties;
+    public static LiveStreamDouYuProperties liveStreamDouYuProperties;
 
     @Resource
     public void setLiveStreamDouYuProperties(LiveStreamDouYuProperties liveStreamDouYuProperties) {
@@ -33,6 +35,19 @@ public class LiveStreamDouYuUtil {
 
     }
 
+    private static LiveStreamDouYuWebSocketClient webSocketClient;
+
+    /**
+     * 定时任务，保存数据
+     */
+    @PreDestroy
+    @Scheduled(fixedDelay = 40000)
+    public void scheduledSavaForAssistantLog() {
+
+        webSocketClient.send(heartBeat());
+
+    }
+
     /**
      * 连接：webSocket
      */
@@ -41,9 +56,9 @@ public class LiveStreamDouYuUtil {
 
         URI uri = new URI(liveStreamDouYuProperties.getWsUrl());
 
-        LiveStreamDouYuWebSocketClient liveStreamDouYuWebSocketClient = new LiveStreamDouYuWebSocketClient(uri);
+        webSocketClient = new LiveStreamDouYuWebSocketClient(uri);
 
-        liveStreamDouYuWebSocketClient.connect();
+        webSocketClient.connect();
 
     }
 

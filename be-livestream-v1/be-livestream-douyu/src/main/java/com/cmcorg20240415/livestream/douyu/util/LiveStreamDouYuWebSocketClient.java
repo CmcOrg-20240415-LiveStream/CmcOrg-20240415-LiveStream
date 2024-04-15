@@ -34,6 +34,11 @@ public class LiveStreamDouYuWebSocketClient extends WebSocketClient {
 
         log.info("连接成功");
 
+        send(LiveStreamDouYuUtil.login(LiveStreamDouYuUtil.liveStreamDouYuProperties.getRoomId()));
+
+        send(LiveStreamDouYuUtil.joinGroup(LiveStreamDouYuUtil.liveStreamDouYuProperties.getRoomId(),
+            LiveStreamDouYuUtil.liveStreamDouYuProperties.getGid()));
+
     }
 
     @Override
