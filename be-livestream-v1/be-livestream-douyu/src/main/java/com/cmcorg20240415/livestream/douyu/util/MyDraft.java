@@ -547,7 +547,7 @@ public class MyDraft extends Draft {
                 (frame.getPayloadData().remaining() > 1000 ? "too big to display"
                     : new String(frame.getPayloadData().array())));
         }
-        frame.isValid();
+        // frame.isValid();
         return frame;
     }
 
