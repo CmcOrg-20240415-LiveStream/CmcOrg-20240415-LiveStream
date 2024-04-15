@@ -42,7 +42,11 @@ public class LiveStreamDouYuUtil {
     @Scheduled(fixedDelay = 40000)
     public void scheduledSavaForAssistantLog() {
 
-        webSocketClient.send(heartBeat());
+        if (webSocketClient.isOpen()) {
+
+            webSocketClient.send(heartBeat());
+
+        }
 
     }
 
@@ -54,7 +58,7 @@ public class LiveStreamDouYuUtil {
 
         URI uri = new URI(liveStreamDouYuProperties.getWsUrl());
 
-        webSocketClient = new LiveStreamDouYuWebSocketClient(uri);
+        webSocketClient = new LiveStreamDouYuWebSocketClient(uri, new MyDraft());
 
         webSocketClient.connect();
 

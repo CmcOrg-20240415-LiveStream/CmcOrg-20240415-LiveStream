@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.java_websocket.client.WebSocketClient;
+import org.java_websocket.drafts.Draft;
 import org.java_websocket.handshake.ServerHandshake;
 
 import com.cmcorg20240415.livestream.douyu.model.bo.MessageBO;
@@ -27,6 +28,10 @@ public class LiveStreamDouYuWebSocketClient extends WebSocketClient {
 
     public LiveStreamDouYuWebSocketClient(URI serverUri) {
         super(serverUri);
+    }
+
+    public LiveStreamDouYuWebSocketClient(URI serverUri, Draft protocolDraft) {
+        super(serverUri, protocolDraft);
     }
 
     @Override
