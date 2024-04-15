@@ -41,6 +41,13 @@ public class LiveStreamDouYuWebSocketClient extends WebSocketClient {
 
     }
 
+    @Override
+    public void onMessage(String s) {
+
+        // nothing
+
+    }
+
     private static final Map<MessageTypeEnum, VoidFunc1<MessageBO>> MESSAGE_HANDLER_MAP = new HashMap<>();
 
     static {
