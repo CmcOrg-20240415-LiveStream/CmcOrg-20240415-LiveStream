@@ -1,4 +1,4 @@
-package com.cmcorg20240415.livestream.belivestreamstart;
+package com.cmcorg20240415.livestream.start;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

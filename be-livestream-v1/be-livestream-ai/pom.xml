@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -9,28 +10,10 @@
         <version>2024.4.15</version>
     </parent>
 
-    <artifactId>be-livestream-start</artifactId>
-    <description>启动包</description>
+    <artifactId>be-livestream-ai</artifactId>
+    <description>ai相关</description>
 
     <dependencies>
-
-        <!-- be-livestream-douyu -->
-        <dependency>
-            <groupId>${cmcorg20240415livestream.groupId}</groupId>
-            <artifactId>be-livestream-douyu</artifactId>
-        </dependency>
-
-        <!-- be-livestream-ai -->
-        <dependency>
-            <groupId>${cmcorg20240415livestream.groupId}</groupId>
-            <artifactId>be-livestream-ai</artifactId>
-        </dependency>
-
-        <!-- spring-boot-web -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
 
         <!-- be-nacos -->
         <dependency>
@@ -53,14 +36,5 @@
         </dependency>
 
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>

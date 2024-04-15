@@ -27,10 +27,42 @@
 
     <modules>
         <module>be-livestream-start</module>
+        <module>be-livestream-ai</module>
+        <module>be-livestream-douyu</module>
+        <module>be-livestream-model</module>
+        <module>be-livestream-util</module>
     </modules>
 
     <dependencyManagement>
         <dependencies>
+
+            <!-- be-livestream-util -->
+            <dependency>
+                <groupId>${cmcorg20240415livestream.groupId}</groupId>
+                <artifactId>be-livestream-util</artifactId>
+                <version>${cmcorg20240415livestream.version}</version>
+            </dependency>
+
+            <!-- be-livestream-model -->
+            <dependency>
+                <groupId>${cmcorg20240415livestream.groupId}</groupId>
+                <artifactId>be-livestream-model</artifactId>
+                <version>${cmcorg20240415livestream.version}</version>
+            </dependency>
+
+            <!-- be-livestream-douyu -->
+            <dependency>
+                <groupId>${cmcorg20240415livestream.groupId}</groupId>
+                <artifactId>be-livestream-douyu</artifactId>
+                <version>${cmcorg20240415livestream.version}</version>
+            </dependency>
+
+            <!-- be-livestream-ai -->
+            <dependency>
+                <groupId>${cmcorg20240415livestream.groupId}</groupId>
+                <artifactId>be-livestream-ai</artifactId>
+                <version>${cmcorg20240415livestream.version}</version>
+            </dependency>
 
             <!-- be-livestream-start -->
             <dependency>
