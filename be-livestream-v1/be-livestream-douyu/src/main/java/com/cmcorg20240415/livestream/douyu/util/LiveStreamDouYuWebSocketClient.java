@@ -41,13 +41,6 @@ public class LiveStreamDouYuWebSocketClient extends WebSocketClient {
 
     }
 
-    @Override
-    public void onMessage(String message) {
-
-        log.info("收到消息-1：{}", message);
-
-    }
-
     private static final Map<MessageTypeEnum, VoidFunc1<MessageBO>> MESSAGE_HANDLER_MAP = new HashMap<>();
 
     static {
@@ -82,7 +75,7 @@ public class LiveStreamDouYuWebSocketClient extends WebSocketClient {
             return;
         }
 
-        log.info("收到消息-2：{}", str);
+        log.info("收到消息：{}", str);
 
         MessageBO messageBO = null;
 

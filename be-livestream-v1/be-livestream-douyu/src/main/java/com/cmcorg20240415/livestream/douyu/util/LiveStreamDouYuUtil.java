@@ -62,39 +62,6 @@ public class LiveStreamDouYuUtil {
 
     }
 
-    @SneakyThrows
-    public static void main(String[] args) {
-
-        URI uri = new URI("wss://danmuproxy.douyu.com:8504/");
-
-        LiveStreamDouYuWebSocketClient webSocketClient = new LiveStreamDouYuWebSocketClient(uri);
-
-        webSocketClient.connect();
-
-        String roomId = "";
-
-        String gId = "";
-
-        ScheduledThreadPoolExecutor scheduledExecutor = ThreadUtil.createScheduledExecutor(1);
-
-        scheduledExecutor.schedule(() -> {
-
-            webSocketClient.send(login(roomId));
-
-            webSocketClient.send(joinGroup(roomId, gId));
-
-            webSocketClient.send(heartBeat());
-
-        }, 3000, TimeUnit.MILLISECONDS);
-
-        scheduledExecutor.scheduleWithFixedDelay(() -> {
-
-            webSocketClient.send(heartBeat());
-
-        }, 3000, 3000, TimeUnit.MILLISECONDS);
-
-    }
-
     /**
      * 登录
      */
