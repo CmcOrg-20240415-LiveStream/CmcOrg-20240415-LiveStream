@@ -3,8 +3,6 @@ package com.cmcorg20240415.livestream.douyu.util;
 import java.io.ByteArrayOutputStream;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -15,7 +13,6 @@ import org.springframework.stereotype.Component;
 
 import com.cmcorg20240415.livestream.douyu.properties.LiveStreamDouYuProperties;
 
-import cn.hutool.core.thread.ThreadUtil;
 import lombok.SneakyThrows;
 
 @Component
@@ -31,6 +28,7 @@ public class LiveStreamDouYuUtil {
     @PostConstruct
     public void postConstruct() {
 
+        // 连接：webSocket
         connectWs();
 
     }
@@ -38,7 +36,7 @@ public class LiveStreamDouYuUtil {
     private static LiveStreamDouYuWebSocketClient webSocketClient;
 
     /**
-     * 定时任务，保存数据
+     * 定时任务，心跳
      */
     @PreDestroy
     @Scheduled(fixedDelay = 40000)
