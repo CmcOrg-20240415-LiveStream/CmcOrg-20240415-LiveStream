@@ -15,6 +15,18 @@
 
     <dependencies>
 
+        <!-- webSocket客户端 -->
+        <dependency>
+            <groupId>org.java-websocket</groupId>
+            <artifactId>Java-WebSocket</artifactId>
+        </dependency>
+
+        <!-- be-livestream-ai -->
+        <dependency>
+            <groupId>${cmcorg20240415livestream.groupId}</groupId>
+            <artifactId>be-livestream-ai</artifactId>
+            <version>${cmcorg20240415livestream.version}</version>
+        </dependency>
 
     </dependencies>
 

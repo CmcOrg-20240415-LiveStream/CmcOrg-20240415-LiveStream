@@ -11,4 +11,6 @@ public interface LiveStreamPropertiesPrefixConstant {
 
     String AI = PRE_LIVESTREAM + "ai"; // ai相关
 
+    String DOUYU = PRE_LIVESTREAM + "douyu"; // 斗鱼相关
+
 }

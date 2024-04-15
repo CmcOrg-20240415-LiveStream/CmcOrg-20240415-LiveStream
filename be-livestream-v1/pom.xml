@@ -36,6 +36,13 @@
     <dependencyManagement>
         <dependencies>
 
+            <!-- webSocket客户端 -->
+            <dependency>
+                <groupId>org.java-websocket</groupId>
+                <artifactId>Java-WebSocket</artifactId>
+                <version>1.5.6</version>
+            </dependency>
+
             <!-- be-livestream-util -->
             <dependency>
                 <groupId>${cmcorg20240415livestream.groupId}</groupId>
