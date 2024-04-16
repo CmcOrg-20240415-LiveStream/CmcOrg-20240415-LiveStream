@@ -125,6 +125,9 @@ public class LiveStreamDouYuUtil {
     // 是否登录成功
     public static boolean SIGN_IN_FLAG = false;
 
+    // 是否存在登录框
+    public static boolean SIGN_IN_FRAME_FLAG = false;
+
     /**
      * 检查
      */
@@ -134,23 +137,26 @@ public class LiveStreamDouYuUtil {
             return;
         }
 
-        WebElement webElement = LiveStreamDouYuSeleniumUtil.getWebElement(null,
-            By.xpath("//*[@id=\"js-header\"]/div/div[1]/div[3]/div[7]/div/a"), null);
+        WebElement webElement =
+            LiveStreamDouYuSeleniumUtil.getWebElement(null, By.xpath("//*[@id=\"login-passport-frame\"]"), null);
 
-        if (webElement == null) {
+        if (webElement != null) {
 
-            webElement =
-                LiveStreamDouYuSeleniumUtil.getWebElement(null, By.xpath("//*[@id=\"login-passport-frame\"]"), null);
+            log.info("未登录成功，存在登录框");
 
-            log.info("未登录成功，存在登录框：{}", webElement != null);
+            SIGN_IN_FRAME_FLAG = true;
 
             return;
 
         }
 
-        log.info("登录成功");
+        if (SIGN_IN_FRAME_FLAG) {
 
-        SIGN_IN_FLAG = true;
+            log.info("登录成功");
+
+            SIGN_IN_FLAG = true;
+
+        }
 
     }
 
