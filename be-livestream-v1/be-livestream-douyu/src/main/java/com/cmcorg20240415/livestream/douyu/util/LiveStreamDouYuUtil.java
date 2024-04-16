@@ -96,6 +96,8 @@ public class LiveStreamDouYuUtil {
 
         if (BooleanUtil.isTrue(liveStreamDouYuProperties.getStopFlag())) {
 
+            log.info("刷新页面");
+
             // 刷新页面
             LiveStreamDouYuSeleniumUtil.webDriver.navigate().refresh();
 
