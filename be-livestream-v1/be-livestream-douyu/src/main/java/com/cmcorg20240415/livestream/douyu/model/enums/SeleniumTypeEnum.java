@@ -53,7 +53,7 @@ public enum SeleniumTypeEnum {
 
         String xpath = bo.getXpath();
 
-        WebElement webElement = LiveStreamDouYuSeleniumUtil.getWebElement(null, By.xpath(xpath), null);
+        WebElement webElement = LiveStreamDouYuSeleniumUtil.getWebElement(null, By.cssSelector(xpath), null);
 
         if (webElement == null) {
 

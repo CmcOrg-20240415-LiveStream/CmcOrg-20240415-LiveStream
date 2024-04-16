@@ -176,8 +176,23 @@ public class LiveStreamDouYuSeleniumUtil {
             return;
         }
 
-        List<SeleniumOperationBO> operationList = CollUtil.newArrayList(
-            SeleniumOperationBO.input("//*[@id=\"layout-Player-aside\"]/div[2]/div/div[2]/div[2]/textarea"),
+        String textarea =
+            "#layout-Player-aside > div.layout-Player-chat > div > div.ChatSpeak > div.ChatSend > textarea";
+
+        WebElement webElement = LiveStreamDouYuSeleniumUtil.getWebElement(null, By.cssSelector(textarea), null);
+
+        if (webElement == null) {
+
+            log.info("刷新页面");
+
+            // 刷新页面
+            LiveStreamDouYuSeleniumUtil.webDriver.navigate().refresh();
+
+            return;
+
+        }
+
+        List<SeleniumOperationBO> operationList = CollUtil.newArrayList(SeleniumOperationBO.input(textarea),
             SeleniumOperationBO.click("//*[@id=\"layout-Player-aside\"]/div[2]/div/div[2]/div[2]/div[2]"));
 
         // 发送弹幕
