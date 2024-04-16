@@ -5,7 +5,6 @@ import java.time.Duration;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 import org.jetbrains.annotations.Nullable;
@@ -39,18 +38,10 @@ public class LiveStreamDouYuSeleniumUtil {
 
     public static WebDriver webDriver;
 
-    @PostConstruct
-    public void postConstruct() {
-
-        // 初始：WebDriver
-        initWebDriver(true);
-
-    }
-
     /**
      * 初始：WebDriver
      */
-    private static void initWebDriver(boolean headless) {
+    public static void initWebDriver(boolean headless) {
 
         if (webDriver != null) {
             return;
@@ -164,16 +155,15 @@ public class LiveStreamDouYuSeleniumUtil {
                     "//*[@id=\"b_results\"]/li[6]/div[1]/h2/a"))));
 
         CRAWLER_OPERATION_MAP.put("douyu.com",
-            CollUtil
-                .newArrayList(SeleniumOperationBO.ifFind(
-                    "//*[@id=\"js-header\"]/div/div[1]/div[3]/div[7]/div/div/a/span", //
+            CollUtil.newArrayList(SeleniumOperationBO.ifFind(
+                "//*[@id=\"js-header\"]/div/div[1]/div[3]/div[7]/div/div/a/span", //
                     CollUtil.newArrayList(
                         SeleniumOperationBO.click("//*[@id=\"js-header\"]/div/div[1]/div[3]/div[7]/div/div/a/span"),
                         SeleniumOperationBO.switchFrame("//*[@id=\"login-passport-frame\"]"), //
                         SeleniumOperationBO.printCanvas(
                             "//*[@id=\"loginbox\"]/div[2]/div[2]/div[5]/div/div[1]/div/div[1]/div/div[1]/div/canvas"), //
                         SeleniumOperationBO.switchFrame(null))) //
-                ));
+            ));
 
     }
 
@@ -248,7 +238,11 @@ public class LiveStreamDouYuSeleniumUtil {
 
         try {
 
+            log.info("打开页面-开始：{}", urlStr);
+
             webDriver.get(urlStr);
+
+            log.info("打开页面-完毕：{}", urlStr);
 
         } catch (Exception e) {
 

@@ -4,7 +4,6 @@ import java.io.ByteArrayOutputStream;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -25,7 +24,6 @@ import com.cmcorg20240415.livestream.douyu.properties.LiveStreamDouYuProperties;
 import com.cmcorg20240415.livestream.util.configuration.BaseConfiguration;
 
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.BooleanUtil;
 import cn.hutool.core.util.StrUtil;
 import lombok.SneakyThrows;
@@ -54,6 +52,9 @@ public class LiveStreamDouYuUtil {
         // 连接：webSocket
         connectWs();
 
+        // 初始：WebDriver
+        LiveStreamDouYuSeleniumUtil.initWebDriver(true);
+
         // 打开浏览器
         openSelenium();
 
@@ -64,13 +65,7 @@ public class LiveStreamDouYuUtil {
      */
     private static void openSelenium() {
 
-        taskScheduler.schedule(() -> {
-
-            log.info("打开页面：{}", liveStreamDouYuProperties.getRoomUrl());
-
-            LiveStreamDouYuSeleniumUtil.getCrawlerResult(liveStreamDouYuProperties.getRoomUrl(), null, null);
-
-        }, DateUtil.offsetMillisecond(new Date(), BaseConstant.SECOND_10_EXPIRE_TIME));
+        LiveStreamDouYuSeleniumUtil.getCrawlerResult(liveStreamDouYuProperties.getRoomUrl(), null, null);
 
     }
 
@@ -97,7 +92,7 @@ public class LiveStreamDouYuUtil {
      * 定时任务，发送弹幕
      */
     @PreDestroy
-    @Scheduled(fixedDelay = 10000, initialDelay = BaseConstant.SECOND_20_EXPIRE_TIME)
+    @Scheduled(fixedDelay = 10000, initialDelay = BaseConstant.SECOND_10_EXPIRE_TIME)
     public void scheduledSendDanMu() {
 
         // 检查
