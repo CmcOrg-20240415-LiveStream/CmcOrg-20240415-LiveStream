@@ -97,7 +97,7 @@ public class LiveStreamDouYuUtil {
      * 定时任务，发送弹幕
      */
     @PreDestroy
-    @Scheduled(fixedDelay = 3000, initialDelay = BaseConstant.SECOND_20_EXPIRE_TIME)
+    @Scheduled(fixedDelay = 10000, initialDelay = BaseConstant.SECOND_20_EXPIRE_TIME)
     public void scheduledSendDanMu() {
 
         // 检查
