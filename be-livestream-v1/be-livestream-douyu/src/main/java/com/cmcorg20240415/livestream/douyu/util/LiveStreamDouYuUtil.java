@@ -10,6 +10,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -86,6 +88,9 @@ public class LiveStreamDouYuUtil {
     @Scheduled(fixedDelay = 3000)
     public void scheduledSendDanMu() {
 
+        // 检查
+        check();
+
         if (CollUtil.isEmpty(DAN_MU_LIST)) {
             return;
         }
@@ -100,6 +105,35 @@ public class LiveStreamDouYuUtil {
             doSendDanMu(danMu);
 
         }
+
+    }
+
+    // 是否登录成功
+    public static boolean SIGN_IN_FLAG = false;
+
+    /**
+     * 检查
+     */
+    private void check() {
+
+        if (SIGN_IN_FLAG) {
+            return;
+        }
+
+        WebElement webElement = LiveStreamDouYuSeleniumUtil.getWebElement(null,
+            By.xpath("//*[@id=\"js-header\"]/div/div[1]/div[3]/div[7]/div/a]"), null);
+
+        if (webElement == null) {
+
+            log.info("登录成功");
+
+            SIGN_IN_FLAG = true;
+
+            return;
+
+        }
+
+        log.info("未登录成功");
 
     }
 

@@ -160,15 +160,15 @@ public class LiveStreamDouYuSeleniumUtil {
                     "//*[@id=\"b_results\"]/li[6]/div[1]/h2/a"))));
 
         CRAWLER_OPERATION_MAP.put("douyu.com",
-            CollUtil.newArrayList(
-                SeleniumOperationBO.ifFind("//*[@id=\"js-header\"]/div/div[1]/div[3]/div[7]/div/div/a/span", //
+            CollUtil
+                .newArrayList(SeleniumOperationBO.ifFind("//*[@id=\"js-header\"]/div/div[1]/div[3]/div[7]/div/div/a", //
                     CollUtil.newArrayList(
-                        SeleniumOperationBO.click("//*[@id=\"js-header\"]/div/div[1]/div[3]/div[7]/div/div/a/span"),
+                        SeleniumOperationBO.click("//*[@id=\"js-header\"]/div/div[1]/div[3]/div[7]/div/div/a"),
                         SeleniumOperationBO.switchFrame("//*[@id=\"login-passport-frame\"]"), //
                         SeleniumOperationBO.printCanvas(
                             "//*[@id=\"loginbox\"]/div[2]/div[2]/div[5]/div/div[1]/div/div[1]/div/div[1]/div/canvas"), //
                         SeleniumOperationBO.switchFrame(null))) //
-            ));
+                ));
 
     }
 
@@ -176,6 +176,10 @@ public class LiveStreamDouYuSeleniumUtil {
      * 发送弹幕
      */
     public synchronized static void sendDanMu(String value) {
+
+        if (!LiveStreamDouYuUtil.SIGN_IN_FLAG) {
+            return;
+        }
 
         List<SeleniumOperationBO> operationList = CollUtil.newArrayList(
             SeleniumOperationBO.input("//*[@id=\"layout-Player-aside\"]/div[2]/div/div[2]/div[2]/textarea"),
