@@ -43,7 +43,7 @@ public class LiveStreamDouYuSeleniumUtil {
     public void postConstruct() {
 
         // 初始：WebDriver
-        initWebDriver(false);
+        initWebDriver(true);
 
     }
 
@@ -165,9 +165,10 @@ public class LiveStreamDouYuSeleniumUtil {
 
         CRAWLER_OPERATION_MAP.put("douyu.com",
             CollUtil
-                .newArrayList(SeleniumOperationBO.ifFind("//*[@id=\"js-header\"]/div/div[1]/div[3]/div[7]/div/div/a", //
+                .newArrayList(SeleniumOperationBO.ifFind(
+                    "//*[@id=\"js-header\"]/div/div[1]/div[3]/div[7]/div/div/a/span", //
                     CollUtil.newArrayList(
-                        SeleniumOperationBO.click("//*[@id=\"js-header\"]/div/div[1]/div[3]/div[7]/div/div/a"),
+                        SeleniumOperationBO.click("//*[@id=\"js-header\"]/div/div[1]/div[3]/div[7]/div/div/a/span"),
                         SeleniumOperationBO.switchFrame("//*[@id=\"login-passport-frame\"]"), //
                         SeleniumOperationBO.printCanvas(
                             "//*[@id=\"loginbox\"]/div[2]/div[2]/div[5]/div/div[1]/div/div[1]/div/div[1]/div/canvas"), //

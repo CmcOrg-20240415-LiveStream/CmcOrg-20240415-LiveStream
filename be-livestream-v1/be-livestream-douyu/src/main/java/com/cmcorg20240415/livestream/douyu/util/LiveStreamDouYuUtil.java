@@ -98,7 +98,7 @@ public class LiveStreamDouYuUtil {
     public void scheduledSendDanMu() {
 
         // 检查
-        // check();
+        check();
 
         if (CollUtil.isEmpty(DAN_MU_LIST)) {
             return;
