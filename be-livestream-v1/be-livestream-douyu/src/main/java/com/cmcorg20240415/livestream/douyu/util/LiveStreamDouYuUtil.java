@@ -125,15 +125,15 @@ public class LiveStreamDouYuUtil {
 
         if (webElement == null) {
 
-            log.info("登录成功");
-
-            SIGN_IN_FLAG = true;
+            log.info("未登录成功");
 
             return;
 
         }
 
-        log.info("未登录成功");
+        log.info("登录成功");
+
+        SIGN_IN_FLAG = true;
 
     }
 
