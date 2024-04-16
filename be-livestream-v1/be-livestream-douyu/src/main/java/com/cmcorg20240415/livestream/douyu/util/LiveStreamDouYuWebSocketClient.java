@@ -76,10 +76,10 @@ public class LiveStreamDouYuWebSocketClient extends WebSocketClient {
 
             List<AIMessageItemDTO> messageList = new ArrayList<>();
 
-            AIMessageItemDTO.text(AIMessageItemRoleEnum.SYSTEM,
-                "你是一个斗鱼主播房间的观众，该主播直播的内容是英雄联盟，我发送的内容就是其他观众的弹幕，请开心幽默的回答该弹幕");
+            messageList.add(AIMessageItemDTO.text(AIMessageItemRoleEnum.SYSTEM,
+                "你是一个斗鱼主播房间的观众，该主播直播的内容是英雄联盟，我发送的内容就是其他观众的弹幕，请开心幽默的回答该弹幕"));
 
-            AIMessageItemDTO.text(AIMessageItemRoleEnum.USER, message);
+            messageList.add(AIMessageItemDTO.text(AIMessageItemRoleEnum.USER, message));
 
             String res = LiveStreamAiUtil.chat(messageList);
 
