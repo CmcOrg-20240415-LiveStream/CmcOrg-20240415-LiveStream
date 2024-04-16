@@ -3,6 +3,9 @@ package com.cmcorg20240415.livestream.douyu.util;
 import java.io.ByteArrayOutputStream;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -12,8 +15,13 @@ import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import com.cmcorg20240415.livestream.ai.model.dto.AIMessageItemDTO;
+import com.cmcorg20240415.livestream.ai.model.enums.AIMessageItemRoleEnum;
+import com.cmcorg20240415.livestream.ai.util.LiveStreamAiUtil;
 import com.cmcorg20240415.livestream.douyu.properties.LiveStreamDouYuProperties;
 
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.StrUtil;
 import lombok.SneakyThrows;
 
 @Component
@@ -63,13 +71,60 @@ public class LiveStreamDouYuUtil {
      */
     @PreDestroy
     @Scheduled(fixedDelay = 40000)
-    public void scheduledSavaForAssistantLog() {
+    public void scheduledHeartBeat() {
 
         if (webSocketClient.isOpen()) {
 
             webSocketClient.send(heartBeat());
 
         }
+
+    }
+
+    public static final List<String> DAN_MU_LIST = new CopyOnWriteArrayList<>();
+
+    /**
+     * 定时任务，发送弹幕
+     */
+    @PreDestroy
+    @Scheduled(fixedDelay = 3000)
+    public void scheduledSendDanMu() {
+
+        if (CollUtil.isEmpty(DAN_MU_LIST)) {
+            return;
+        }
+
+        String danMu = DAN_MU_LIST.get(DAN_MU_LIST.size() - 1);
+
+        DAN_MU_LIST.clear();
+
+        // 执行：发送弹幕
+        doSendDanMu(danMu);
+
+    }
+
+    /**
+     * 执行：发送弹幕
+     */
+    public static void doSendDanMu(String danMu) {
+
+        List<AIMessageItemDTO> messageList = new ArrayList<>();
+
+        String preset = liveStreamDouYuProperties.getPreset();
+
+        if (StrUtil.isNotBlank(preset)) {
+
+            messageList.add(AIMessageItemDTO.text(AIMessageItemRoleEnum.SYSTEM, preset));
+
+        }
+
+        messageList.add(AIMessageItemDTO.text(AIMessageItemRoleEnum.USER, danMu));
+
+        // 获取：助手回复
+        String res = LiveStreamAiUtil.chat(messageList);
+
+        // 执行：发送弹幕
+        LiveStreamDouYuSeleniumUtil.sendDanMu(res);
 
     }
 

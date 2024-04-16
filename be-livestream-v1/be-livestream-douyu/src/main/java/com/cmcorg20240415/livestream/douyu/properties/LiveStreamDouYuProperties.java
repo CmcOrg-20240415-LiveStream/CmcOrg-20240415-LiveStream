@@ -34,4 +34,9 @@ public class LiveStreamDouYuProperties {
      */
     private String roomUrl;
 
+    /**
+     * 预设内容
+     */
+    private String preset;
+
 }
