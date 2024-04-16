@@ -16,6 +16,7 @@ import com.cmcorg20240415.livestream.douyu.model.bo.MessageBO;
 import com.cmcorg20240415.livestream.douyu.model.enums.MessageTypeEnum;
 
 import cn.hutool.core.lang.func.VoidFunc1;
+import cn.hutool.core.util.BooleanUtil;
 import cn.hutool.core.util.ReUtil;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -69,7 +70,11 @@ public class LiveStreamDouYuWebSocketClient extends WebSocketClient {
 
             log.info("新消息：{}", message);
 
-            LiveStreamDouYuUtil.DAN_MU_LIST.add(message);
+            if (!BooleanUtil.isTrue(LiveStreamDouYuUtil.liveStreamDouYuProperties.getStopFlag())) {
+
+                LiveStreamDouYuUtil.DAN_MU_LIST.add(message);
+
+            }
 
         });
 

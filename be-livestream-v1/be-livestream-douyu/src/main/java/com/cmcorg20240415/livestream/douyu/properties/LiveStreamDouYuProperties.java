@@ -39,4 +39,9 @@ public class LiveStreamDouYuProperties {
      */
     private String preset;
 
+    /**
+     * 是否停止，默认：false
+     */
+    private Boolean stopFlag;
+
 }

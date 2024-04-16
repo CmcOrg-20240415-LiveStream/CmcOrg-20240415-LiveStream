@@ -20,6 +20,7 @@ import com.cmcorg20240415.livestream.ai.util.LiveStreamAiUtil;
 import com.cmcorg20240415.livestream.douyu.properties.LiveStreamDouYuProperties;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.BooleanUtil;
 import cn.hutool.core.util.StrUtil;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -93,8 +94,17 @@ public class LiveStreamDouYuUtil {
 
         DAN_MU_LIST.clear();
 
-        // 执行：发送弹幕
-        doSendDanMu(danMu);
+        if (BooleanUtil.isTrue(liveStreamDouYuProperties.getStopFlag())) {
+
+            // 刷新页面
+            LiveStreamDouYuSeleniumUtil.webDriver.navigate().refresh();
+
+        } else {
+
+            // 执行：发送弹幕
+            doSendDanMu(danMu);
+
+        }
 
     }
 
