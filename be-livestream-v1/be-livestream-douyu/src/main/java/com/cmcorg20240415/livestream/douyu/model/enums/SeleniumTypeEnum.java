@@ -33,7 +33,10 @@ public enum SeleniumTypeEnum {
         WebElement webElement = LiveStreamDouYuSeleniumUtil.getWebElement(null, By.xpath(xpath), null);
 
         if (webElement == null) {
+
+            log.info("点击-no：{}", xpath);
             return;
+
         }
 
         JavascriptExecutor js = (JavascriptExecutor)LiveStreamDouYuSeleniumUtil.webDriver;
@@ -53,7 +56,10 @@ public enum SeleniumTypeEnum {
         WebElement webElement = LiveStreamDouYuSeleniumUtil.getWebElement(null, By.xpath(xpath), null);
 
         if (webElement == null) {
+
+            log.info("输入-no：{}", xpath);
             return;
+
         }
 
         if (CollUtil.isNotEmpty(handlerBo.getInputList())) {
@@ -81,7 +87,10 @@ public enum SeleniumTypeEnum {
         WebElement webElement = LiveStreamDouYuSeleniumUtil.getWebElement(null, By.xpath(xpath), null);
 
         if (webElement == null) {
+
+            log.info("跳转到新的 url-no：{}", xpath);
             return;
+
         }
 
         String href = webElement.getAttribute("href");
@@ -106,7 +115,10 @@ public enum SeleniumTypeEnum {
             WebElement webElement = LiveStreamDouYuSeleniumUtil.getWebElement(null, By.xpath(xpath), null);
 
             if (webElement == null) {
+
+                log.info("跳转到可用的 url-no：{}", xpath);
                 continue;
+
             }
 
             String href = webElement.getAttribute("href");
@@ -135,7 +147,10 @@ public enum SeleniumTypeEnum {
         WebElement webElement = LiveStreamDouYuSeleniumUtil.getWebElement(null, By.xpath(xpath), null);
 
         if (webElement == null) {
+
+            log.info("存在元素-no：{}", xpath);
             return;
+
         }
 
         List<SeleniumOperationBO> subList = bo.getSubList();
@@ -169,7 +184,10 @@ public enum SeleniumTypeEnum {
         WebElement webElement = LiveStreamDouYuSeleniumUtil.getWebElement(null, By.xpath(xpath), null);
 
         if (webElement == null) {
+
+            log.info("获取文字-no：{}", xpath);
             return;
+
         }
 
         handlerBo.getStrBuilder().append(webElement.getText()).append("\n");
@@ -187,7 +205,10 @@ public enum SeleniumTypeEnum {
         WebElement webElement = LiveStreamDouYuSeleniumUtil.getWebElement(null, By.xpath(xpath), null);
 
         if (webElement == null) {
+
+            log.info("获取canvas内容-no：{}", xpath);
             return;
+
         }
 
         JavascriptExecutor js = (JavascriptExecutor)LiveStreamDouYuSeleniumUtil.webDriver;
@@ -219,7 +240,10 @@ public enum SeleniumTypeEnum {
         WebElement webElement = LiveStreamDouYuSeleniumUtil.getWebElement(null, By.xpath(xpath), null);
 
         if (webElement == null) {
+
+            log.info("切换 frame-no：{}", xpath);
             return;
+
         }
 
         log.info("切换 frame：{}", xpath);

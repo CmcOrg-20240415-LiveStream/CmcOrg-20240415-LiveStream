@@ -246,6 +246,8 @@ public class LiveStreamDouYuSeleniumUtil {
 
         } catch (Exception e) {
 
+            e.printStackTrace();
+
             quitWebDriver();
 
             initWebDriver(true);
@@ -350,6 +352,8 @@ public class LiveStreamDouYuSeleniumUtil {
             });
 
         } catch (Exception e) {
+
+            e.printStackTrace();
 
             return null;
 
