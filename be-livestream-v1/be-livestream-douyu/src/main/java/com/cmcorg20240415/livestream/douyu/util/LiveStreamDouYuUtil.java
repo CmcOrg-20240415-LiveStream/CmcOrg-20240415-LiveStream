@@ -134,7 +134,10 @@ public class LiveStreamDouYuUtil {
 
         if (webElement == null) {
 
-            log.info("未登录成功");
+            webElement =
+                LiveStreamDouYuSeleniumUtil.getWebElement(null, By.xpath("//*[@id=\"login-passport-frame\"]"), null);
+
+            log.info("未登录成功，存在登录框：{}", webElement != null);
 
             return;
 
