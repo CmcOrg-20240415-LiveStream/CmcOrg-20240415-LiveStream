@@ -22,8 +22,10 @@ import com.cmcorg20240415.livestream.douyu.properties.LiveStreamDouYuProperties;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 
 @Component
+@Slf4j
 public class LiveStreamDouYuUtil {
 
     public static LiveStreamDouYuProperties liveStreamDouYuProperties;
