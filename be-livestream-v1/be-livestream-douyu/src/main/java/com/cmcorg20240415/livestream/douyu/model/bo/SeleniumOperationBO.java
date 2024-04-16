@@ -2,6 +2,8 @@ package com.cmcorg20240415.livestream.douyu.model.bo;
 
 import java.util.List;
 
+import org.jetbrains.annotations.Nullable;
+
 import com.cmcorg20240415.livestream.douyu.model.enums.SeleniumTypeEnum;
 
 import lombok.Data;
@@ -123,6 +125,23 @@ public class SeleniumOperationBO {
         SeleniumOperationBO seleniumOperationBO = new SeleniumOperationBO();
 
         seleniumOperationBO.setType(SeleniumTypeEnum.PRINT_CANVAS);
+        seleniumOperationBO.setXpath(xpath);
+
+        return seleniumOperationBO;
+
+    }
+
+    /**
+     * 切换：frame
+     * 
+     * @param xpath 为空则表示：切回来
+     * 
+     */
+    public static SeleniumOperationBO switchFrame(@Nullable String xpath) {
+
+        SeleniumOperationBO seleniumOperationBO = new SeleniumOperationBO();
+
+        seleniumOperationBO.setType(SeleniumTypeEnum.SWITCH_FRAME);
         seleniumOperationBO.setXpath(xpath);
 
         return seleniumOperationBO;

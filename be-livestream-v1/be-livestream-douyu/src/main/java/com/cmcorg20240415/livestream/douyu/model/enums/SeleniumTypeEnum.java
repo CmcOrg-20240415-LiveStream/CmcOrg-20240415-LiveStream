@@ -36,7 +36,9 @@ public enum SeleniumTypeEnum {
             return;
         }
 
-        webElement.click();
+        JavascriptExecutor js = (JavascriptExecutor)LiveStreamDouYuSeleniumUtil.webDriver;
+
+        js.executeScript("arguments[0].click();", webElement);
 
     }), // 点击
 
@@ -184,6 +186,29 @@ public enum SeleniumTypeEnum {
         log.info("canvasBase64内容：{}", canvasBase64);
 
     }), // 打印 canvas的内容
+
+    SWITCH_FRAME(801, (handlerBo) -> {
+
+        SeleniumOperationBO bo = handlerBo.getBo();
+
+        String xpath = bo.getXpath();
+
+        if (StrUtil.isBlank(xpath)) {
+
+            LiveStreamDouYuSeleniumUtil.webDriver.switchTo().defaultContent(); // 切回来
+            return;
+
+        }
+
+        WebElement webElement = LiveStreamDouYuSeleniumUtil.getWebElement(null, By.xpath(xpath), null);
+
+        if (webElement == null) {
+            return;
+        }
+
+        LiveStreamDouYuSeleniumUtil.webDriver.switchTo().frame(webElement);
+
+    }), // 切换：frame
 
     ;
 

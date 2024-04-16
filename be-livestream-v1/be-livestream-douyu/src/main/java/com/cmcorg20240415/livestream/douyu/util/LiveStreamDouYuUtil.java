@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -25,11 +26,33 @@ public class LiveStreamDouYuUtil {
         LiveStreamDouYuUtil.liveStreamDouYuProperties = liveStreamDouYuProperties;
     }
 
+    public static TaskExecutor taskExecutor;
+
+    @Resource
+    public void setTaskExecutor(TaskExecutor taskExecutor) {
+        LiveStreamDouYuUtil.taskExecutor = taskExecutor;
+    }
+
+    @Resource
+    LiveStreamDouYuSeleniumUtil liveStreamDouYuSeleniumUtil;
+
     @PostConstruct
     public void postConstruct() {
 
         // 连接：webSocket
         connectWs();
+
+        // 打开浏览器
+        openSelenium();
+
+    }
+
+    /**
+     * 打开浏览器
+     */
+    private void openSelenium() {
+
+        LiveStreamDouYuSeleniumUtil.getCrawlerResult(liveStreamDouYuProperties.getRoomUrl(), null, null);
 
     }
 

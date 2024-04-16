@@ -5,13 +5,18 @@ import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.drafts.Draft;
 import org.java_websocket.handshake.ServerHandshake;
 
+import com.cmcorg20240415.livestream.ai.model.dto.AIMessageItemDTO;
+import com.cmcorg20240415.livestream.ai.model.enums.AIMessageItemRoleEnum;
+import com.cmcorg20240415.livestream.ai.util.LiveStreamAiUtil;
 import com.cmcorg20240415.livestream.douyu.model.bo.MessageBO;
 import com.cmcorg20240415.livestream.douyu.model.enums.MessageTypeEnum;
 
@@ -65,7 +70,21 @@ public class LiveStreamDouYuWebSocketClient extends WebSocketClient {
 
         MESSAGE_HANDLER_MAP.put(MessageTypeEnum.MESSAGE, messageBo -> {
 
-            log.info("新消息：{}", messageBo.getValue());
+            String message = messageBo.getValue();
+
+            log.info("新消息：{}", message);
+
+            List<AIMessageItemDTO> messageList = new ArrayList<>();
+
+            AIMessageItemDTO.text(AIMessageItemRoleEnum.SYSTEM,
+                "你是一个斗鱼主播房间的观众，该主播直播的内容是英雄联盟，我发送的内容就是其他观众的弹幕，请开心幽默的回答该弹幕");
+
+            AIMessageItemDTO.text(AIMessageItemRoleEnum.USER, message);
+
+            String res = LiveStreamAiUtil.chat(messageList);
+
+            // 执行：发送弹幕
+            LiveStreamDouYuSeleniumUtil.sendDanMu(res);
 
         });
 
@@ -123,7 +142,24 @@ public class LiveStreamDouYuWebSocketClient extends WebSocketClient {
             return;
         }
 
-        voidFunc1.call(messageBO);
+        MessageBO finalMessageBO = messageBO;
+
+        LiveStreamDouYuUtil.taskExecutor.execute(() -> {
+
+            // 执行
+            exec(voidFunc1, finalMessageBO);
+
+        });
+
+    }
+
+    /**
+     * 执行
+     */
+    @SneakyThrows
+    private static void exec(VoidFunc1<MessageBO> voidFunc1, MessageBO finalMessageBO) {
+
+        voidFunc1.call(finalMessageBO);
 
     }
 

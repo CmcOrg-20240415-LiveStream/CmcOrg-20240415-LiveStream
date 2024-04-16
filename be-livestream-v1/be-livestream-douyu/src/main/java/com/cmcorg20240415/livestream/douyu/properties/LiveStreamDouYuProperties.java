@@ -29,4 +29,9 @@ public class LiveStreamDouYuProperties {
      */
     private String gid;
 
+    /**
+     * 房间链接
+     */
+    private String roomUrl;
+
 }
