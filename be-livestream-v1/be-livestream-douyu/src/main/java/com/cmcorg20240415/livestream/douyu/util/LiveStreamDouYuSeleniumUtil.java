@@ -28,6 +28,7 @@ import com.cmcorg20240415.livestream.douyu.model.bo.SeleniumOperationHandlerBO;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.text.StrBuilder;
+import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.core.util.URLUtil;
 import lombok.SneakyThrows;
@@ -184,7 +185,7 @@ public class LiveStreamDouYuSeleniumUtil {
 
         StrBuilder strBuilder = StrUtil.strBuilder();
 
-        getCrawlerResult("https://www.douyu.com/11496398", null, strBuilder);
+        getCrawlerResult("https://www.douyu.com/11496398", CollUtil.newArrayList(IdUtil.simpleUUID()), strBuilder);
 
         System.out.println(strBuilder);
 
