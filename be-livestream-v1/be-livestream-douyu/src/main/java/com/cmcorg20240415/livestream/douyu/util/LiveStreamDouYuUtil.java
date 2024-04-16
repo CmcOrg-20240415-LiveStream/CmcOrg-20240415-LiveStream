@@ -141,7 +141,7 @@ public class LiveStreamDouYuUtil {
         }
 
         WebElement webElement = LiveStreamDouYuSeleniumUtil.getWebElement(null,
-            By.xpath("//*[@id=\"js-header\"]/div/div[1]/div[3]/div[7]/div/a/span/div/div/img"), null);
+            By.xpath("//*[@id=\"js-header\"]/div/div[1]/div[3]/div[7]/div/a"), null);
 
         if (webElement == null) {
 
