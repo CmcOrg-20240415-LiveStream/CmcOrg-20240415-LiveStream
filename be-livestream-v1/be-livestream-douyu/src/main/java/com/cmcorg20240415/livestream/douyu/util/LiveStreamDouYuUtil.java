@@ -94,14 +94,7 @@ public class LiveStreamDouYuUtil {
 
         DAN_MU_LIST.clear();
 
-        if (BooleanUtil.isTrue(liveStreamDouYuProperties.getStopFlag())) {
-
-            log.info("刷新页面");
-
-            // 刷新页面
-            LiveStreamDouYuSeleniumUtil.webDriver.navigate().refresh();
-
-        } else {
+        if (!BooleanUtil.isTrue(liveStreamDouYuProperties.getStopFlag())) {
 
             // 执行：发送弹幕
             doSendDanMu(danMu);
