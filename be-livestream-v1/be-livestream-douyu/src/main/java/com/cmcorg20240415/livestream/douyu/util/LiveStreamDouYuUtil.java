@@ -130,11 +130,11 @@ public class LiveStreamDouYuUtil {
         }
 
         WebElement webElement = LiveStreamDouYuSeleniumUtil.getWebElement(null,
-            By.xpath("//*[@id=\"js-header\"]/div/div[1]/div[3]/div[7]/div/a]"), null);
+            By.xpath("//*[@id=\"js-header\"]/div/div[1]/div[3]/div[7]/div/a"), null);
 
         if (webElement == null) {
 
-            // log.info("未登录成功");
+            log.info("未登录成功");
 
             return;
 
