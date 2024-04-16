@@ -4,24 +4,28 @@ import java.io.ByteArrayOutputStream;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.annotation.PreDestroy;
-import javax.annotation.Resource;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.springframework.core.task.TaskExecutor;
+import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import com.cmcorg20230301.be.engine.model.model.constant.BaseConstant;
 import com.cmcorg20240415.livestream.ai.model.dto.AIMessageItemDTO;
 import com.cmcorg20240415.livestream.ai.model.enums.AIMessageItemRoleEnum;
 import com.cmcorg20240415.livestream.ai.util.LiveStreamAiUtil;
 import com.cmcorg20240415.livestream.douyu.properties.LiveStreamDouYuProperties;
+import com.cmcorg20240415.livestream.util.configuration.BaseConfiguration;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.BooleanUtil;
 import cn.hutool.core.util.StrUtil;
 import lombok.SneakyThrows;
@@ -35,15 +39,17 @@ public class LiveStreamDouYuUtil {
 
     public static TaskExecutor taskExecutor;
 
-    @Resource
-    public void setTaskExecutor(TaskExecutor taskExecutor) {
-        LiveStreamDouYuUtil.taskExecutor = taskExecutor;
-    }
+    public static TaskScheduler taskScheduler;
 
     public LiveStreamDouYuUtil(LiveStreamDouYuSeleniumUtil liveStreamDouYuSeleniumUtil,
-        LiveStreamDouYuProperties liveStreamDouYuProperties) {
+        LiveStreamDouYuProperties liveStreamDouYuProperties, BaseConfiguration baseConfiguration,
+        TaskExecutor taskExecutor, TaskScheduler taskScheduler) {
 
         LiveStreamDouYuUtil.liveStreamDouYuProperties = liveStreamDouYuProperties;
+
+        LiveStreamDouYuUtil.taskExecutor = taskExecutor;
+
+        LiveStreamDouYuUtil.taskScheduler = taskScheduler;
 
         // 连接：webSocket
         connectWs();
@@ -56,9 +62,15 @@ public class LiveStreamDouYuUtil {
     /**
      * 打开浏览器
      */
-    private void openSelenium() {
+    private static void openSelenium() {
 
-        LiveStreamDouYuSeleniumUtil.getCrawlerResult(liveStreamDouYuProperties.getRoomUrl(), null, null);
+        taskScheduler.schedule(() -> {
+
+            log.info("打开页面：{}", liveStreamDouYuProperties.getRoomUrl());
+
+            LiveStreamDouYuSeleniumUtil.getCrawlerResult(liveStreamDouYuProperties.getRoomUrl(), null, null);
+
+        }, DateUtil.offsetMillisecond(new Date(), BaseConstant.SECOND_10_EXPIRE_TIME));
 
     }
 
@@ -89,7 +101,7 @@ public class LiveStreamDouYuUtil {
     public void scheduledSendDanMu() {
 
         // 检查
-        check();
+        // check();
 
         if (CollUtil.isEmpty(DAN_MU_LIST)) {
             return;
@@ -125,7 +137,7 @@ public class LiveStreamDouYuUtil {
 
         if (webElement == null) {
 
-            log.info("未登录成功");
+            // log.info("未登录成功");
 
             return;
 
@@ -141,6 +153,10 @@ public class LiveStreamDouYuUtil {
      * 执行：发送弹幕
      */
     public static void doSendDanMu(String danMu) {
+
+        if (!LiveStreamDouYuUtil.SIGN_IN_FLAG) {
+            return;
+        }
 
         List<AIMessageItemDTO> messageList = new ArrayList<>();
 

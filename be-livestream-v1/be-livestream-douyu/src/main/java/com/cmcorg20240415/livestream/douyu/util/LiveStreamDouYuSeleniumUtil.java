@@ -31,8 +31,10 @@ import cn.hutool.core.text.StrBuilder;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.core.util.URLUtil;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 
 @Component
+@Slf4j
 public class LiveStreamDouYuSeleniumUtil {
 
     public static WebDriver webDriver;
@@ -70,6 +72,8 @@ public class LiveStreamDouYuSeleniumUtil {
         handleChromiumOptions(chromeOptions, headless);
 
         webDriver = new ChromeDriver(chromeOptions);
+
+        log.info("浏览器初始化完成");
 
     }
 
@@ -317,7 +321,7 @@ public class LiveStreamDouYuSeleniumUtil {
 
     }
 
-    public static final Duration TIMEOUT = Duration.ofMillis(BaseConstant.SECOND_6_EXPIRE_TIME);
+    public static final Duration TIMEOUT = Duration.ofMillis(BaseConstant.SECOND_10_EXPIRE_TIME);
 
     /**
      * 获取：元素

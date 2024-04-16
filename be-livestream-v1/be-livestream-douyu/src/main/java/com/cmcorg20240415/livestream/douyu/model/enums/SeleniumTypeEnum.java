@@ -40,6 +40,8 @@ public enum SeleniumTypeEnum {
 
         js.executeScript("arguments[0].click();", webElement);
 
+        log.info("点击：{}", xpath);
+
     }), // 点击
 
     INPUT(201, (handlerBo) -> {
@@ -61,6 +63,8 @@ public enum SeleniumTypeEnum {
             if (StrUtil.isNotBlank(inputStr)) {
 
                 webElement.sendKeys(inputStr);
+
+                log.info("输入：{}", xpath);
 
             }
 
@@ -87,6 +91,8 @@ public enum SeleniumTypeEnum {
             // 跳转到新的 url
             LiveStreamDouYuSeleniumUtil.getCrawlerResult(href, handlerBo.getInputList(), handlerBo.getStrBuilder());
 
+            log.info("跳转到新的 url：{}", xpath);
+
         }
 
     }), // 跳转到该 url
@@ -109,6 +115,8 @@ public enum SeleniumTypeEnum {
 
                 // 跳转到新的 url
                 LiveStreamDouYuSeleniumUtil.getCrawlerResult(href, handlerBo.getInputList(), handlerBo.getStrBuilder());
+
+                log.info("跳转到可用的 url：{}", xpath);
 
                 break;
 
@@ -135,6 +143,8 @@ public enum SeleniumTypeEnum {
         if (CollUtil.isEmpty(subList)) {
             return;
         }
+
+        log.info("存在元素：{}", xpath);
 
         for (SeleniumOperationBO item : subList) {
 
@@ -164,6 +174,8 @@ public enum SeleniumTypeEnum {
 
         handlerBo.getStrBuilder().append(webElement.getText()).append("\n");
 
+        log.info("获取文字：{}", xpath);
+
     }), // 获取元素里面的文字内容
 
     PRINT_CANVAS(701, (handlerBo) -> {
@@ -180,6 +192,8 @@ public enum SeleniumTypeEnum {
 
         JavascriptExecutor js = (JavascriptExecutor)LiveStreamDouYuSeleniumUtil.webDriver;
 
+        log.info("获取canvas内容：{}", xpath);
+
         String canvasBase64 =
             (String)js.executeScript("return arguments[0].toDataURL('image/png').substring(21);", webElement);
 
@@ -195,6 +209,8 @@ public enum SeleniumTypeEnum {
 
         if (StrUtil.isBlank(xpath)) {
 
+            log.info("切换 frame：根节点");
+
             LiveStreamDouYuSeleniumUtil.webDriver.switchTo().defaultContent(); // 切回来
             return;
 
@@ -205,6 +221,8 @@ public enum SeleniumTypeEnum {
         if (webElement == null) {
             return;
         }
+
+        log.info("切换 frame：{}", xpath);
 
         LiveStreamDouYuSeleniumUtil.webDriver.switchTo().frame(webElement);
 
