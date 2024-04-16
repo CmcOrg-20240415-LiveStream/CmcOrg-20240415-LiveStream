@@ -16,7 +16,6 @@ import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import com.cmcorg20230301.be.engine.model.model.constant.BaseConstant;
 import com.cmcorg20240415.livestream.ai.model.dto.AIMessageItemDTO;
 import com.cmcorg20240415.livestream.ai.model.enums.AIMessageItemRoleEnum;
 import com.cmcorg20240415.livestream.ai.util.LiveStreamAiUtil;
@@ -92,7 +91,7 @@ public class LiveStreamDouYuUtil {
      * 定时任务，发送弹幕
      */
     @PreDestroy
-    @Scheduled(fixedDelay = 10000, initialDelay = BaseConstant.SECOND_10_EXPIRE_TIME)
+    @Scheduled(fixedDelay = 10000)
     public void scheduledSendDanMu() {
 
         // 检查
