@@ -43,7 +43,7 @@ public class LiveStreamDouYuSeleniumUtil {
     public void postConstruct() {
 
         // 初始：WebDriver
-        initWebDriver(true);
+        initWebDriver(false);
 
     }
 
