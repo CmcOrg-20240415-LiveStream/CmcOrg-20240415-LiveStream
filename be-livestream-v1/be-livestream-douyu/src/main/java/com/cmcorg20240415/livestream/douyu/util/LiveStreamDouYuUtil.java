@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 
@@ -29,11 +28,6 @@ public class LiveStreamDouYuUtil {
 
     public static LiveStreamDouYuProperties liveStreamDouYuProperties;
 
-    @Resource
-    public void setLiveStreamDouYuProperties(LiveStreamDouYuProperties liveStreamDouYuProperties) {
-        LiveStreamDouYuUtil.liveStreamDouYuProperties = liveStreamDouYuProperties;
-    }
-
     public static TaskExecutor taskExecutor;
 
     @Resource
@@ -41,11 +35,10 @@ public class LiveStreamDouYuUtil {
         LiveStreamDouYuUtil.taskExecutor = taskExecutor;
     }
 
-    @Resource
-    LiveStreamDouYuSeleniumUtil liveStreamDouYuSeleniumUtil;
+    public LiveStreamDouYuUtil(LiveStreamDouYuSeleniumUtil liveStreamDouYuSeleniumUtil,
+        LiveStreamDouYuProperties liveStreamDouYuProperties) {
 
-    @PostConstruct
-    public void postConstruct() {
+        LiveStreamDouYuUtil.liveStreamDouYuProperties = liveStreamDouYuProperties;
 
         // 连接：webSocket
         connectWs();
