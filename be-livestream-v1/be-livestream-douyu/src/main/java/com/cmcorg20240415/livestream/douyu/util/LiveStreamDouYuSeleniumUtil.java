@@ -79,6 +79,22 @@ public class LiveStreamDouYuSeleniumUtil {
 
         chromiumOptions.addArguments("--no-sandbox");
 
+        chromiumOptions.addArguments("--disable-gpu");
+
+        chromiumOptions.addArguments("--disable-dev-shm-usage");
+
+        chromiumOptions.addArguments("--start-maximized");
+
+        chromiumOptions.addArguments("--disable-infobars");
+
+        // chromiumOptions.addArguments("--user-data-dir=/home/browserUserDataDir");
+
+        // chromiumOptions.setExperimentalOption("detach", true);
+
+        chromiumOptions.setExperimentalOption("useAutomationExtension", false);
+
+        chromiumOptions.setExperimentalOption("excludeSwitches", CollUtil.newArrayList("enable-automation"));
+
     }
 
     @PreDestroy
@@ -183,10 +199,13 @@ public class LiveStreamDouYuSeleniumUtil {
 
         if (webElement == null) {
 
-            log.info("刷新页面");
+            webElement = LiveStreamDouYuSeleniumUtil.getWebElement(null, By.xpath("/html"), null);
 
-            // 刷新页面
-            LiveStreamDouYuSeleniumUtil.webDriver.navigate().refresh();
+            log.info("当前页面：url：{}\n页面：{}", LiveStreamDouYuSeleniumUtil.webDriver.getCurrentUrl(),
+                webElement.getAttribute("innerHTML"));
+            //
+            // // 刷新页面
+            // LiveStreamDouYuSeleniumUtil.webDriver.navigate().refresh();
 
             return;
 
