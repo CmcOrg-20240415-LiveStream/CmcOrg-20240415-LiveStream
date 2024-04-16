@@ -61,7 +61,7 @@ public class LiveStreamAiUtil {
         // 执行
         String resultStr = RetryUtil.execHttpRequest(httpRequest);
 
-        // log.info("入参：{}\n返回：{}", paramStr, StrUtil.cleanBlank(resultStr));
+        log.info("入参：{}\n返回：{}", paramStr, StrUtil.cleanBlank(resultStr));
 
         JSONObject result = JSONUtil.parseObj(resultStr);
 

@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -16,6 +17,7 @@ import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import com.cmcorg20230301.be.engine.model.model.constant.BaseConstant;
 import com.cmcorg20240415.livestream.ai.model.dto.AIMessageItemDTO;
 import com.cmcorg20240415.livestream.ai.model.enums.AIMessageItemRoleEnum;
 import com.cmcorg20240415.livestream.ai.util.LiveStreamAiUtil;
@@ -23,6 +25,7 @@ import com.cmcorg20240415.livestream.douyu.properties.LiveStreamDouYuProperties;
 import com.cmcorg20240415.livestream.util.configuration.BaseConfiguration;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.BooleanUtil;
 import cn.hutool.core.util.StrUtil;
 import lombok.SneakyThrows;
@@ -61,13 +64,13 @@ public class LiveStreamDouYuUtil {
      */
     private static void openSelenium() {
 
-        // taskScheduler.schedule(() -> {
+        taskScheduler.schedule(() -> {
 
-        log.info("打开页面：{}", liveStreamDouYuProperties.getRoomUrl());
+            log.info("打开页面：{}", liveStreamDouYuProperties.getRoomUrl());
 
-        LiveStreamDouYuSeleniumUtil.getCrawlerResult(liveStreamDouYuProperties.getRoomUrl(), null, null);
+            LiveStreamDouYuSeleniumUtil.getCrawlerResult(liveStreamDouYuProperties.getRoomUrl(), null, null);
 
-        // }, DateUtil.offsetMillisecond(new Date(), BaseConstant.SECOND_10_EXPIRE_TIME));
+        }, DateUtil.offsetMillisecond(new Date(), BaseConstant.SECOND_10_EXPIRE_TIME));
 
     }
 
@@ -94,7 +97,7 @@ public class LiveStreamDouYuUtil {
      * 定时任务，发送弹幕
      */
     @PreDestroy
-    @Scheduled(fixedDelay = 3000)
+    @Scheduled(fixedDelay = 3000, initialDelay = BaseConstant.SECOND_20_EXPIRE_TIME)
     public void scheduledSendDanMu() {
 
         // 检查
@@ -110,8 +113,16 @@ public class LiveStreamDouYuUtil {
 
         if (!BooleanUtil.isTrue(liveStreamDouYuProperties.getStopFlag())) {
 
-            // 执行：发送弹幕
-            doSendDanMu(danMu);
+            try {
+
+                // 执行：发送弹幕
+                doSendDanMu(danMu);
+
+            } catch (Exception e) {
+
+                e.printStackTrace();
+
+            }
 
         }
 
