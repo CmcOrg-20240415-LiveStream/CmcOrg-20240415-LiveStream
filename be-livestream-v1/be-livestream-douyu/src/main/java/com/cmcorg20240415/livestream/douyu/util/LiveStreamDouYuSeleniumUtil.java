@@ -318,7 +318,7 @@ public class LiveStreamDouYuSeleniumUtil {
 
     }
 
-    public static final Duration TIMEOUT = Duration.ofMillis(BaseConstant.SECOND_10_EXPIRE_TIME);
+    public static final Duration TIMEOUT = Duration.ofMillis(BaseConstant.SECOND_20_EXPIRE_TIME);
 
     /**
      * 获取：元素
@@ -335,6 +335,8 @@ public class LiveStreamDouYuSeleniumUtil {
         }
 
         try {
+
+            log.info("寻找元素：{}", by.toString());
 
             WebDriverWait webDriverWait = new WebDriverWait(webDriver, timeout);
 
@@ -353,7 +355,7 @@ public class LiveStreamDouYuSeleniumUtil {
 
         } catch (Exception e) {
 
-            e.printStackTrace();
+            log.info("未找到元素：{}", by.toString());
 
             return null;
 
