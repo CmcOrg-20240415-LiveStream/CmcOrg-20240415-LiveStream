@@ -9,12 +9,12 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 
 import com.cmcorg20230301.be.engine.util.util.RetryUtil;
-import com.cmcorg20240415.livestream.ai.configuration.base.BaseConfiguration;
 import com.cmcorg20240415.livestream.ai.model.dto.AIMessageItemDTO;
 import com.cmcorg20240415.livestream.ai.model.enums.AIMessageItemContentTypeEnum;
 import com.cmcorg20240415.livestream.ai.model.enums.AIModelTypeEnum;
 import com.cmcorg20240415.livestream.ai.properties.LiveStreamAiProperties;
 import com.cmcorg20240415.livestream.model.constant.LiveStreamLogTopicConstant;
+import com.cmcorg20240415.livestream.util.configuration.BaseConfiguration;
 
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpRequest;

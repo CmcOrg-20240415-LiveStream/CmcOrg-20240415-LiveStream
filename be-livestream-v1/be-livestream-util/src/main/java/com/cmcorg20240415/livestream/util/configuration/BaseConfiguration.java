@@ -1,4 +1,4 @@
-package com.cmcorg20240415.livestream.ai.configuration.base;
+package com.cmcorg20240415.livestream.util.configuration;
 
 import java.util.concurrent.ThreadPoolExecutor;
 
