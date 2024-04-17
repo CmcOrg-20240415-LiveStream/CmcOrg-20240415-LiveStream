@@ -60,6 +60,7 @@ public class LiveStreamDouYuSeleniumUtil {
 
         ChromeOptions chromeOptions = new ChromeOptions();
 
+        // 通用处理：浏览器参数
         handleChromiumOptions(chromeOptions, headless);
 
         webDriver = new ChromeDriver(chromeOptions);
@@ -86,6 +87,16 @@ public class LiveStreamDouYuSeleniumUtil {
         chromiumOptions.addArguments("--start-maximized");
 
         chromiumOptions.addArguments("--disable-infobars");
+
+        chromiumOptions.addArguments("--disable-software-rasterizer");
+
+        chromiumOptions.addArguments("--disable-plugins");
+
+        chromiumOptions.addArguments("--disable-extensions");
+
+        chromiumOptions.addArguments("--disable-images");
+
+        chromiumOptions.addArguments("blink-settings=imagesEnabled=false");
 
         // chromiumOptions.addArguments("--user-data-dir=/home/browserUserDataDir");
 
@@ -233,7 +244,7 @@ public class LiveStreamDouYuSeleniumUtil {
 
         StrBuilder strBuilder = StrUtil.strBuilder();
 
-        getCrawlerResult("https://douyu.com/11496398", null, strBuilder);
+        getCrawlerResult(BAIDU, CollUtil.newArrayList("java"), strBuilder);
 
         System.out.println(strBuilder);
 
@@ -263,7 +274,7 @@ public class LiveStreamDouYuSeleniumUtil {
             return null;
         }
 
-        return url.getHost();
+        return url.getHost().replaceAll("www.", "");
 
     }
 

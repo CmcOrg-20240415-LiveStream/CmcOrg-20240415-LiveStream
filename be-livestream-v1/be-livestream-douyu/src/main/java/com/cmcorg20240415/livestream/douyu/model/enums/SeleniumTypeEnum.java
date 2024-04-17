@@ -125,10 +125,10 @@ public enum SeleniumTypeEnum {
 
             if (StrUtil.isNotBlank(href)) {
 
+                log.info("跳转到可用的 url：{}", xpath);
+
                 // 跳转到新的 url
                 LiveStreamDouYuSeleniumUtil.getCrawlerResult(href, handlerBo.getInputList(), handlerBo.getStrBuilder());
-
-                log.info("跳转到可用的 url：{}", xpath);
 
                 break;
 
