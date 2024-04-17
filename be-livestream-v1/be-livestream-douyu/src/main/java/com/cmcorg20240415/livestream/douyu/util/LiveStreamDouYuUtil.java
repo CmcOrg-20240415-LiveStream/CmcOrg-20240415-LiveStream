@@ -97,13 +97,19 @@ public class LiveStreamDouYuUtil {
         // 检查
         check();
 
-        if (CollUtil.isEmpty(DAN_MU_LIST)) {
-            return;
+        String danMu;
+
+        synchronized (DAN_MU_LIST) {
+
+            if (CollUtil.isEmpty(DAN_MU_LIST)) {
+                return;
+            }
+
+            danMu = DAN_MU_LIST.get(DAN_MU_LIST.size() - 1);
+
+            DAN_MU_LIST.clear();
+
         }
-
-        String danMu = DAN_MU_LIST.get(DAN_MU_LIST.size() - 1);
-
-        DAN_MU_LIST.clear();
 
         if (!BooleanUtil.isTrue(liveStreamDouYuProperties.getStopFlag())) {
 
