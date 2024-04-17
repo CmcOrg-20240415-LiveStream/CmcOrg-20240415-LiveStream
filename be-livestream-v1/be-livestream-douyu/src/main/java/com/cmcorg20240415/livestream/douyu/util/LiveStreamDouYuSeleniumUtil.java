@@ -98,6 +98,8 @@ public class LiveStreamDouYuSeleniumUtil {
 
         chromiumOptions.addArguments("blink-settings=imagesEnabled=false");
 
+        chromiumOptions.addArguments("--disable-blink-features=AutomationControlled");
+
         // chromiumOptions.addArguments("--user-data-dir=/home/browserUserDataDir");
 
         // chromiumOptions.setExperimentalOption("detach", true);
