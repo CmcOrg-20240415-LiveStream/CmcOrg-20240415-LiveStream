@@ -134,7 +134,7 @@ public class LiveStreamDouYuSeleniumUtil {
 
     public static final String DOUYU = "https://douyu.com";
 
-    // 爬虫：爬取网站的 xpath，key：网站的 host，value：xpath集合
+    // key：网站的 host，value：操作集合
     public static final Map<String, List<SeleniumOperationBO>> CRAWLER_OPERATION_MAP = MapUtil.newHashMap();
 
     static {
@@ -155,12 +155,13 @@ public class LiveStreamDouYuSeleniumUtil {
         CRAWLER_OPERATION_MAP.put("baike.baidu.com",
             CollUtil.newArrayList(SeleniumOperationBO.text("//*[@id=\"J-lemma-main-wrapper\"]/div[2]/div/div[1]/div")));
 
-        CRAWLER_OPERATION_MAP.put("baidu.com",
-            CollUtil.newArrayList(SeleniumOperationBO.input("//*[@id=\"kw\"]"),
-                SeleniumOperationBO.click("//*[@id=\"su\"]"),
-                SeleniumOperationBO.jumpUsableUrl(CollUtil.newArrayList("//*[@id=\"1\"]/div/h3/a",
-                    "//*[@id=\"2\"]/div/h3/a", "//*[@id=\"3\"]/div/h3/a", "//*[@id=\"4\"]/div/h3/a",
-                    "//*[@id=\"5\"]/div/h3/a", "//*[@id=\"6\"]/div/h3/a"))));
+        CRAWLER_OPERATION_MAP.put("baidu.com", CollUtil.newArrayList(SeleniumOperationBO.input("//*[@id=\"kw\"]"),
+            SeleniumOperationBO.click("//*[@id=\"su\"]"),
+            SeleniumOperationBO.jumpUsableUrl(CollUtil.newArrayList("//*[@id=\"1\"]/div/h3/a",
+                "//*[@id=\"2\"]/div/h3/a", "//*[@id=\"3\"]/div/h3/a", "//*[@id=\"4\"]/div/h3/a",
+                "//*[@id=\"5\"]/div/h3/a", "//*[@id=\"6\"]/div/h3/a", "//*[@id=\"1\"]/div/div[1]/h3/a",
+                "//*[@id=\"2\"]/div/div[1]/h3/a", "//*[@id=\"3\"]/div/div[1]/h3/a", "//*[@id=\"4\"]/div/div[1]/h3/a",
+                "//*[@id=\"5\"]/div/div[1]/h3/a", "//*[@id=\"6\"]/div/div[1]/h3/a"))));
 
         CRAWLER_OPERATION_MAP.put("cn.bing.com",
             CollUtil.newArrayList(SeleniumOperationBO.input("//*[@id=\"sb_form_q\"]"),
@@ -168,7 +169,10 @@ public class LiveStreamDouYuSeleniumUtil {
                 SeleniumOperationBO.jumpUsableUrl(CollUtil.newArrayList("//*[@id=\"b_results\"]/li[1]/div[1]/h2/a",
                     "//*[@id=\"b_results\"]/li[2]/div[1]/h2/a", "//*[@id=\"b_results\"]/li[3]/div[1]/h2/a",
                     "//*[@id=\"b_results\"]/li[4]/div[1]/h2/a", "//*[@id=\"b_results\"]/li[5]/div[1]/h2/a",
-                    "//*[@id=\"b_results\"]/li[6]/div[1]/h2/a"))));
+                    "//*[@id=\"b_results\"]/li[6]/div[1]/h2/a", "//*[@id=\"b_results\"]/li[1]/h2/a",
+                    "//*[@id=\"b_results\"]/li[2]/h2/a", "//*[@id=\"b_results\"]/li[3]/h2/a",
+                    "//*[@id=\"b_results\"]/li[4]/h2/a", "//*[@id=\"b_results\"]/li[5]/h2/a",
+                    "//*[@id=\"b_results\"]/li[6]/h2/a"))));
 
         CRAWLER_OPERATION_MAP.put("douyu.com",
             CollUtil.newArrayList(SeleniumOperationBO.ifFind(
@@ -192,10 +196,9 @@ public class LiveStreamDouYuSeleniumUtil {
             return;
         }
 
-        String textarea =
-            "#layout-Player-aside > div.layout-Player-chat > div > div.ChatSpeak > div.ChatSend > textarea";
+        String textarea = "//*[@id=\"layout-Player-aside\"]/div[2]/div/div[2]/div[2]/textarea";
 
-        WebElement webElement = LiveStreamDouYuSeleniumUtil.getWebElement(null, By.cssSelector(textarea), null);
+        WebElement webElement = LiveStreamDouYuSeleniumUtil.getWebElement(null, By.xpath(textarea), null);
 
         if (webElement == null) {
 
