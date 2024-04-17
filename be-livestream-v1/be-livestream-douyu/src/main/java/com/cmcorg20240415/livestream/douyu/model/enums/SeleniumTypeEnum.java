@@ -68,7 +68,9 @@ public enum SeleniumTypeEnum {
 
             if (StrUtil.isNotBlank(inputStr)) {
 
-                webElement.sendKeys(inputStr);
+                JavascriptExecutor js = (JavascriptExecutor)LiveStreamDouYuSeleniumUtil.webDriver;
+
+                js.executeScript("arguments[0].value = " + inputStr, webElement);
 
                 log.info("输入：{}", xpath);
 
