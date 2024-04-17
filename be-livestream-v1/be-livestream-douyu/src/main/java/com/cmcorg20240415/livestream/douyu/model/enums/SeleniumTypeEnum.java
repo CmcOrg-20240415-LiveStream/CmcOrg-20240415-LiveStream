@@ -70,7 +70,7 @@ public enum SeleniumTypeEnum {
 
                 JavascriptExecutor js = (JavascriptExecutor)LiveStreamDouYuSeleniumUtil.webDriver;
 
-                js.executeScript("arguments[0].value = " + inputStr, webElement);
+                js.executeScript("arguments[0].value = \"" + inputStr + "\";", webElement);
 
                 log.info("输入：{}", xpath);
 
