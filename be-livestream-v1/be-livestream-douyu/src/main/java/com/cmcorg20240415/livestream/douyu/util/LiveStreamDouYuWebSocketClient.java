@@ -56,7 +56,11 @@ public class LiveStreamDouYuWebSocketClient extends WebSocketClient {
 
         MESSAGE_HANDLER_MAP.put(MessageTypeEnum.JOIN_ROOM, messageBo -> {
 
-            log.info("新用户加入：{}", messageBo.getValue());
+            String message = messageBo.getValue();
+
+            log.info("新用户加入：{}", message);
+
+            LiveStreamDouYuUtil.DAN_MU_LIST.add("欢迎：" + message + "，加入直播间");
 
         });
 
