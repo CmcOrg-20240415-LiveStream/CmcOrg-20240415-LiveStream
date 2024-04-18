@@ -68,11 +68,7 @@ public class LiveStreamDouYuWebSocketClient extends WebSocketClient {
 
             if (!BooleanUtil.isTrue(LiveStreamDouYuUtil.liveStreamDouYuProperties.getStopFlag())) {
 
-                synchronized (LiveStreamDouYuUtil.DAN_MU_LIST) {
-
-                    LiveStreamDouYuUtil.DAN_MU_LIST.add(message);
-
-                }
+                LiveStreamDouYuUtil.DAN_MU_LIST.add(message);
 
             }
 

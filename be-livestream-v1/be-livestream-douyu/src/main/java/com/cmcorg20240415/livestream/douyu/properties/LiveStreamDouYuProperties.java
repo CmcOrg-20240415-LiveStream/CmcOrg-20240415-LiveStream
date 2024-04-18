@@ -1,5 +1,7 @@
 package com.cmcorg20240415.livestream.douyu.properties;
 
+import java.util.List;
+
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Component;
@@ -43,5 +45,10 @@ public class LiveStreamDouYuProperties {
      * 是否停止，默认：false
      */
     private Boolean stopFlag;
+
+    /**
+     * 预设弹幕集合
+     */
+    private List<String> presetDanMuList;
 
 }

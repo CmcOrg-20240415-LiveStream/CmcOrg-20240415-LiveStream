@@ -24,6 +24,7 @@ import com.cmcorg20240415.livestream.util.configuration.BaseConfiguration;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.BooleanUtil;
+import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -97,19 +98,24 @@ public class LiveStreamDouYuUtil {
         // 检查
         check();
 
-        String danMu;
+        if (CollUtil.isEmpty(DAN_MU_LIST)) {
 
-        synchronized (DAN_MU_LIST) {
+            List<String> presetDanMuList = liveStreamDouYuProperties.getPresetDanMuList();
 
-            if (CollUtil.isEmpty(DAN_MU_LIST)) {
+            if (CollUtil.isEmpty(presetDanMuList)) {
                 return;
             }
 
-            danMu = DAN_MU_LIST.get(DAN_MU_LIST.size() - 1);
+            // 随机添加一个弹幕
+            DAN_MU_LIST.add(RandomUtil.randomEle(presetDanMuList));
 
-            DAN_MU_LIST.clear();
+            return;
 
         }
+
+        String danMu = DAN_MU_LIST.get(DAN_MU_LIST.size() - 1);
+
+        DAN_MU_LIST.clear();
 
         if (!BooleanUtil.isTrue(liveStreamDouYuProperties.getStopFlag())) {
 
